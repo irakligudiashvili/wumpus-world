@@ -1,5 +1,5 @@
 ﻿namespace WumpusWorld.Logic.Expressions {
-    public class Symbol {
+    public class Symbol : IExpression {
         public string Name { get; }
 
         public Symbol(string name) => Name = name;

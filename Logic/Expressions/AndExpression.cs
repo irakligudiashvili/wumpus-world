@@ -1,5 +1,5 @@
 ﻿namespace WumpusWorld.Logic.Expressions {
-    public class AndExpression {
+    public class AndExpression : IExpression {
         public IExpression Left { get; }
         public IExpression Right { get; }
 

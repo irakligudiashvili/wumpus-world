@@ -1,5 +1,5 @@
 ﻿namespace WumpusWorld.Logic.Expressions {
-    public class Negation {
+    public class Negation : IExpression {
         public IExpression Argument { get; }
 
         public Negation(IExpression arg) {
