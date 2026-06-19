@@ -5,6 +5,7 @@ namespace WumpusWorld.Logic {
     public class KnowledgeBase {
         private readonly List<IExpression> _sentences = new List<IExpression>();
         private readonly CnfConverter _converter = new CnfConverter();
+        private readonly ResolutionEngine _resolution = new ResolutionEngine();
 
         public void Tell(IExpression sentence) {
             if(sentence == null) {
@@ -14,22 +15,22 @@ namespace WumpusWorld.Logic {
             _sentences.Add(sentence);
         }
 
-        public void Ask(IExpression query) {
+        public bool Ask(IExpression query) {
             if(query == null) {
                 throw new ArgumentNullException(nameof(query));
             }
 
-            // TODO: negate the query
+            // 1. negate the query
             IExpression negatedQuery = new Negation(query);
 
-            // TODO: combine KB sentences and negated query
+            // 2. combine KB sentences and negated query
             var sentencesToConvert = new List<IExpression>(_sentences) { negatedQuery };
 
-            // TODO: convert sentences into CNF clauses
+            // 3. convert sentences into CNF clauses
             List<Clause> clauses = _converter.ConvertToCnfClauses(sentencesToConvert);
 
-            // TODO: run resolution
-
+            // 4. run resolution
+            return _resolution.Evaluate(clauses);
         }
     }
 }
