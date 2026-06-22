@@ -2,7 +2,7 @@
 
 namespace WumpusWorld.Logic {
     public class ResolutionEngine {
-        private const int Limit = 20000;
+        private const int Limit = 200000;
 
         public bool Evaluate(List<Clause> clauses) {
             var clauseSet = new HashSet<string>();
@@ -86,11 +86,11 @@ namespace WumpusWorld.Logic {
 
             return resolvents;
         }
-        
+
 
         private bool ContainsTautology(HashSet<Literal> literals) {
-            foreach(var lit in literals) {
-                if(literals.Contains(lit.Negate())) {
+            foreach (var lit in literals) {
+                if (literals.Contains(lit.Negate())) {
                     return true;
                 }
             }
@@ -100,7 +100,7 @@ namespace WumpusWorld.Logic {
 
         private bool IsRedundant(Clause target, List<Clause> globalSet) {
             foreach (var existing in globalSet) {
-                if(existing.Literals.Count <= target.Literals.Count && existing.Literals.IsSubsetOf(target.Literals)) {
+                if (existing.Literals.Count <= target.Literals.Count && existing.Literals.IsSubsetOf(target.Literals)) {
                     return true;
                 }
             }
