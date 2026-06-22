@@ -6,6 +6,7 @@
         public bool IsAlive { get; set; } = true;
         public bool HasGold { get; set; } = false;
         public int Score { get; set; } = 0;
+        public bool HasWon { get; set; } = false;
 
         public void MoveForward() {
             Position = Facing switch {
@@ -43,6 +44,14 @@
 
         public void AdjustScore(int amount) {
             Score += amount;
+        }
+
+        public void ShootArrow() {
+            if (HasArrow) {
+                HasArrow = false;
+                Score -= 10;
+                Logger.Log($"[ACTION] Agent has fired an arrow");
+            }
         }
     }
 }
